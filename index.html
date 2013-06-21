@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Hover Glow</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+  	$(function() {
+		
+			var originalBGplaypen = $("#playpen").css("background-color"),
+			    x, y, xy, bgWebKit, bgMoz, 
+			    lightColor = "rgba(255,255,255,0.75)",
+			    gradientSize = 100;
+					
+				// Basic Demo
+				$('#playpen').mousemove(function(e) {
+				
+					x  = e.pageX - this.offsetLeft;
+					y  = e.pageY - this.offsetTop;
+					xy = x + " " + y;
+					   
+					bgWebKit = "-webkit-gradient(radial, " + xy + ", 0, " + xy + ", " + gradientSize + ", from(" + lightColor + "), to(rgba(255,255,255,0.0))), " + originalBGplaypen;
+					bgMoz    = "-moz-radial-gradient(" + x + "px " + y + "px 45deg, circle, " + lightColor + " 0%, " + originalBGplaypen + " " + gradientSize + "px)";
+										
+					$(this)
+						.css({ background: bgWebKit })
+						.css({ background: bgMoz });
+					
+				}).mouseleave(function() {			
+					$(this).css({ background: originalBGplaypen });
+				});
+				
+			
+		
+				var originalBG = $(".nav a").css("background-color");
+				
+				$('.nav li:not(".active") a')
+				.mousemove(function(e) {
+				
+					   x  = e.pageX - this.offsetLeft;
+					   y  = e.pageY - this.offsetTop;
+					   xy = x + " " + y;
+					   
+				       bgWebKit = "-webkit-gradient(radial, " + xy + ", 0, " + xy + ", 100, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0.0))), " + originalBG;
+					   bgMoz    = "-moz-radial-gradient(" + x + "px " + y + "px 45deg, circle, " + lightColor + " 0%, " + originalBG + " " + gradientSize + "px)";
+				
+						$(this).css({ background: bgWebKit })
+                        .css({ background: bgMoz });
+						
+				}).mouseleave(function() {
+					$(this).css({ background:originalBG });
+				});
+				
+		});
+
+</script>
+<style>
+.nav { 
+	list-style: none; 
+	padding: 10px 10px 0 10px;	
+}
+.nav li { display: inline; }
+.nav li.active a {
+	position: relative;
+	z-index: 1; 
+	bottom: -2px;
+	margin-top: -2px;
+	background: #eee;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+.nav li a { 
+	float: left; 
+	text-decoration: none;
+	position: relative;
+	padding: 7px 30px; 
+	margin: 0 0 0 -8px; 
+	color: #222;
+	background: #d8d7d8; 
+	-webkit-border-top-right-radius: 20px 40px;
+	-webkit-border-top-left-radius: 20px 40px;
+	-moz-border-radius-topleft: 20px 40px;
+	-moz-border-radius-topright: 20px 40px;
+	-webkit-box-shadow: inset 1px 1px 0 white;
+	-moz-box-shadow: inset 1px 1px 0 white;
+	border: 1px solid #a0a0a0;
+}
+</style>
+</head>
+
+<body>
+<ul class="nav clearfix">
+   <li><a href="#">Home</a></li>
+   <li><a href="#">About</a></li>
+   <li class="active"><a href="#">Clients</a></li>
+   <li><a href="#">Contact Us</a></li>
+</ul>
+</body>
+</html>
